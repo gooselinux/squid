@@ -1,0 +1,43 @@
+------------------------------------------------------------
+revno: 10526
+revision-id: henrik@henriknordstrom.net-20100531195106-xstf1v51c014hshk
+parent: squid3@treenet.co.nz-20100531122010-yp63jcsv41zkrdf3
+committer: Henrik Nordstrom <henrik@henriknordstrom.net>
+branch nick: trunk
+timestamp: Mon 2010-05-31 21:51:06 +0200
+message:
+  Bug #2937: Fails to detect chunked encoding if not given in all lower case
+------------------------------------------------------------
+# Bazaar merge directive format 2 (Bazaar 0.90)
+# revision_id: henrik@henriknordstrom.net-20100531195106-\
+#   xstf1v51c014hshk
+# target_branch: http://www.squid-cache.org/bzr/squid3/trunk/
+# testament_sha1: de48b8430fd08c909c914fabf1fd422e5438daec
+# timestamp: 2010-05-31 19:52:31 +0000
+# source_branch: http://www.squid-cache.org/bzr/squid3/trunk/
+# base_revision_id: squid3@treenet.co.nz-20100531122010-\
+#   yp63jcsv41zkrdf3
+# 
+# Begin patch
+=== modified file 'src/HttpHeader.cc'
+--- src/HttpHeader.cc	2010-05-23 16:37:30 +0000
++++ src/HttpHeader.cc	2010-05-31 19:51:06 +0000
+@@ -1748,7 +1748,7 @@
+     String header (getStrOrList(id));
+ 
+     while (strListGetItem(&header, separator, &item, &ilen, &pos)) {
+-        if (strncmp(item, member, mlen) == 0
++        if (strncasecmp(item, member, mlen) == 0
+                 && (item[mlen] == '=' || item[mlen] == separator || item[mlen] == ';' || item[mlen] == '\0')) {
+             result = 1;
+             break;
+@@ -1772,7 +1772,7 @@
+     String header (getByName(name));
+ 
+     while (strListGetItem(&header, separator, &item, &ilen, &pos)) {
+-        if (strncmp(item, member, mlen) == 0
++        if (strncasecmp(item, member, mlen) == 0
+                 && (item[mlen] == '=' || item[mlen] == separator || item[mlen] == ';' || item[mlen] == '\0')) {
+             result = 1;
+             break;
+

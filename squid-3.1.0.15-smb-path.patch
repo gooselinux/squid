@@ -1,0 +1,37 @@
+diff -up squid-3.1.0.15/helpers/basic_auth/SMB/Makefile.am.smb-path squid-3.1.0.15/helpers/basic_auth/SMB/Makefile.am
+--- squid-3.1.0.15/helpers/basic_auth/SMB/Makefile.am.smb-path	2009-11-23 04:09:56.000000000 +0100
++++ squid-3.1.0.15/helpers/basic_auth/SMB/Makefile.am	2009-11-23 17:53:39.000000000 +0100
+@@ -9,14 +9,14 @@
+ include $(top_srcdir)/src/Common.am
+ 
+ # SAMBAPREFIX must point to the directory where Samba has been installed.
+-# By default, Samba is installed in /usr/local/samba. If you changed this
++# By default, Samba is installed in /usr. If you changed this
+ # by using the --prefix option when configuring Samba, you need to change
+ # SAMBAPREFIX accordingly.
+ 
+ ## FIXME: autoconf should test for the samba path.
+ 
+ SMB_AUTH_HELPER	= smb_auth.sh
+-SAMBAPREFIX=/usr/local/samba
++SAMBAPREFIX=/usr
+ SMB_AUTH_HELPER_PATH = $(libexecdir)/$(SMB_AUTH_HELPER)
+ 
+ libexec_SCRIPTS	= $(SMB_AUTH_HELPER)
+diff -up squid-3.1.0.15/helpers/basic_auth/SMB/Makefile.in.smb-path squid-3.1.0.15/helpers/basic_auth/SMB/Makefile.in
+--- squid-3.1.0.15/helpers/basic_auth/SMB/Makefile.in.smb-path	2009-11-23 04:10:32.000000000 +0100
++++ squid-3.1.0.15/helpers/basic_auth/SMB/Makefile.in	2009-11-23 17:54:47.000000000 +0100
+@@ -271,11 +271,11 @@ INCLUDES = -I$(top_srcdir) -I$(top_srcdi
+ 	-I$(top_builddir)/include $(SQUID_CPPUNIT_INC) -I$(srcdir)
+ 
+ # SAMBAPREFIX must point to the directory where Samba has been installed.
+-# By default, Samba is installed in /usr/local/samba. If you changed this
++# By default, Samba is installed in /usr. If you changed this
+ # by using the --prefix option when configuring Samba, you need to change
+ # SAMBAPREFIX accordingly.
+ SMB_AUTH_HELPER = smb_auth.sh
+-SAMBAPREFIX = /usr/local/samba
++SAMBAPREFIX = /usr
+ SMB_AUTH_HELPER_PATH = $(libexecdir)/$(SMB_AUTH_HELPER)
+ libexec_SCRIPTS = $(SMB_AUTH_HELPER)
+ smb_auth_CFLAGS = -DSAMBAPREFIX=\"$(SAMBAPREFIX)\" -DHELPERSCRIPT=\"$(SMB_AUTH_HELPER_PATH)\"
